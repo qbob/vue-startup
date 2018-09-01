@@ -6,7 +6,7 @@ const userRouter = {
     title: '用户中心',
     requireAuth: true
   },
-  component: () => import('../views/user/index'),
+  component: () => import('@/views/user/index'),
   children: [
 
   ]
