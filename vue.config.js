@@ -6,7 +6,7 @@ const resolve = dir => {
 }
 
 const env = process.env.NODE_ENV || 'development'
-fs.writeFileSync(path.join(__dirname, '.src/config/env.js'), `export default '${env}'
+fs.writeFileSync(path.join(__dirname, './src/config/env.js'), `export default '${env}'
 `)
 
 // 项目部署基础

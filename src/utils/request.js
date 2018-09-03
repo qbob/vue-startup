@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import Qs from 'qs'
 import store from '@/store'
 import * as types from '@/store/types'
 import router from '@/router'
@@ -28,7 +29,7 @@ class HttpRequest {
       console.log('store', store.getters.token)
 
       if (store.getters.token) {
-        config.headers['x-access-token'] = store.getters.token
+        config.headers['X-Auth-Token'] = store.getters.token
       }
 
       return config
@@ -80,9 +81,9 @@ class HttpRequest {
       baseURL: config.apiServer,
       // timeout: 5000,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         // 'Content-Type': 'application/json; charset=UTF-8',
-        'X-URL-PATH': location.pathname
+        // 'X-URL-PATH': location.pathname
       }
     }
     return Axios.create(conf)
@@ -95,6 +96,11 @@ class HttpRequest {
   request (options) {
     var instance = this.create()
     this.interceptors(instance, options.url)
+
+    if (options.method === 'post') {
+      options.data = Qs.stringify(options.data)
+    }
+
     options = Object.assign({}, options)
     this.queue[options.url] = instance
     return instance(options)

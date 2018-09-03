@@ -6,6 +6,7 @@ node_modules
 /tests/e2e/screenshots/
 
 package-lock.json
+src/config/env.js
 
 # local env files
 .env.local
